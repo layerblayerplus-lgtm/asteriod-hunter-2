@@ -6,5 +6,5 @@
 - I also fixed the tutorial to also work with mobile mode
 - I also also made the turret be able to turn while laser is air in only game modes
 - demo link https://microstudio.io/layerbylayer/astreroidhunter3/YD5AWCT2/
--  for the full game and files check https://github.com/layerblayerplus-lgtm/asteriod-hunter
+-  for the full game and files open the index file in the zip after downloading I made it in microstudio game engine on a chromebook so no exe :(
 short read me because only worked on it for 4 hours
