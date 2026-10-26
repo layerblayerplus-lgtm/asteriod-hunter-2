@@ -1,0 +1,1295 @@
+init = function()
+  // tutor
+   tutor=0
+  // tutor
+  //mouse inputs
+  //upgrade purchase sensing
+  copperclick=false
+  waterclick=false
+  solarclick=false
+  carbonc=false
+  co2c=false
+  oxygenpipec=false
+  sidelasersc=false
+  stabyc=false
+  hstabyc=false
+  cstabyc=false
+  methc=false
+  smethc=false
+  rocketc=false
+  methfc=false
+  oxyfc=false
+  //upgrade purchase sensing
+  clicktimer=0
+  mousetype=0
+  //mouse inputs
+  //
+  base=-153
+  //
+  //devtools
+  devmode=false
+  infinte=false
+  // devtools
+  // 
+  //lets game run
+  tutorG=true
+  oxygenc=false
+  wirec=false
+  hydrogenclick=false
+  work=90
+  //lets game run
+  //
+  //asteriod materials
+  carbon=storage.get ("carbon")
+  water=storage.get ("water")
+  silicon=storage.get ("silicon")
+  nickel=storage.get ("nickel")
+  iron=storage.get ("iron")
+  copper=storage.get ("copper")
+  //gases
+  hydrogen=storage.get ("hyrogen")
+  oxygen=storage.get ("oxygen")
+  co2=storage.get ("co2")
+  methane=storage.get ("methane")
+  //gases
+  //asteriod materials
+  //
+  //upgrades
+  waterstorage=storage.get("waterstorage")
+  electro=0
+  wsh=storage.get("wsh")
+  coppertube1=storage.get("coppertube1")
+  cth=3//its it actually 4
+  solar=storage.get("solar")//solar pannel
+  sh=storage.get("sh")//health for solar pannel
+  SE=0.15// solar effecincy
+  oxygentank=storage.get("oxygentank")
+  oth=storage.get("oth")
+  hydrogentank=storage.get("hydrogentank")
+  electrowire=storage.get("electrowire")
+  carbonlaser=storage.get("carbonlaser")
+  clh=storage.get("clh")
+  laser=false
+  co2tank=storage.get("co2tank")
+  sidelasers=storage.get("sidelasers")
+  staby=storage.get("staby")
+  sth=storage.get("sth")
+  stabyon=false
+  sheat=1
+  methanetank=storage.get("methanetank")
+  testdmg=false
+  rocketbody=storage.get("rocketbody")
+ 
+  //upgrades
+  //
+  //pipes
+  oxygenlaser=storage.get("methanetank")
+  hydrogenstaby=storage.get("methanetank")
+  co2staby=storage.get("methanetank")
+  stabymethane=storage.get("methanetank")
+ methf= storage.get("methf")
+ oxyf= storage.get("oxyf")
+  //pipes
+  //
+  //fix
+  waterclickfix=false
+  solarclickfix=false
+  carboncfix=false
+  copperclickfix=false
+  //fix
+  //
+  //animation
+  heat=0
+  stabyA=0
+  //animation
+  //
+  //asteriods
+  asteriodhit=false
+  asteriod_odd=random.next(2)//determines asteriod type
+  shots=0// how many laser beem hits
+  IG=0// internal gravity transfer unit
+  CIG=20//carbon internal gravity
+  SIG=18//stony internal gravity
+  MCIG=16//metalic internal gravity
+  MLIG=14//metal internal gravity
+  Aspeed=1//asteriod speed
+  asteriod="carbonaceous_asteriod"
+  //asteriods
+  //
+  //laserbeem
+  BEEM="beem"
+  speed=2//speed of laser
+  speedS=2//stable speed
+  beemy=280//starting y postion
+  beemx= 0//starting x postion
+  beem_good=0// used to let laser know it should be in flight
+  //laserbeem
+  //
+  //time/ticks
+ start=false
+ stop=0//used for time transfer for 1.5
+ Stop=0//used for time  transfer for 1.25
+ sTop=0//used for time  transfer for 1.25
+ clock=1// changes to 1.5 and 1.25 for in game ticks
+ time=1// time from start of game
+   //time/ticks
+   //
+   //ect
+   clear=false
+   //ect
+   //
+   //playerhelp
+   helpup==false
+   helpdown=false
+   //playerhelp
+   notfirst=storage.get("notfirst") 
+   //
+   
+     if notfirst==false then power=13 else
+      power=storage.get("power") end
+      gameend=false
+end 
+
+
+
+  
+update = function()
+  if gameend==false then
+  if clock==1.5  then speed=speedS end
+ // time
+ if stop==0 then if clock==1  then stop=1 after 1  seconds do stop =0 clock=clock+0.5 end end end
+ if clock==1.5 then time=time+1 end
+ if Stop==0 then if clock==1   then Stop=1 after 0.5 seconds do Stop =0 clock=clock+0.25 end end end
+ if clock>1 then after 0.01 seconds do clock=1 end end
+ //time
+ if work==90 and clear==true then   
+if LASER_BEEM.BEEM_Y<=ASTERIOD.Y and LASER_BEEM.BEEM_Y>=ASTERIOD.Y-HB or LASER_BEEM.BEEM_Y>=ASTERIOD.Y  and LASER_BEEM.BEEM_Y<=ASTERIOD.Y+HB then if LASER_BEEM.BEEM_X<=ASTERIOD.X and LASER_BEEM.BEEM_X>=ASTERIOD.X-HB or LASER_BEEM.BEEM_X>=ASTERIOD.X  and LASER_BEEM.BEEM_X<=ASTERIOD.X+HB then after 0.05 seconds do
+ beemy=209 if BEEM=="beem" then shots=shots+0.25 elsif BEEM=="bigbeem" then shots=shots+1 end if shots>S/IG and IG>0 then after 0.6 seconds do shots=0 y=-160  end end end end  end 
+ if S<20 then HB=S-9 elsif S<50 then HB=S-20 elsif S<70 then HB=S-40 else HB=S-60 end //hitbox size for asteriod
+    ASTERIOD=object
+   X=x
+   Y=y
+   Type=asteriod
+   SIZE=S end
+    LASER_BEEM=object
+      BEEM_X=beemx
+      BEEM_Y=beemy end
+  if y>-160 then 
+    y=y-Aspeed  s=40  end 
+  if y<=-160 then 
+    S=0.01 shots=0 end
+   if y<=-160  then
+    after 1 seconds do
+    y=225  neg_pos=random.next(1) end
+    if neg_pos<0.5 then
+      x=x=+random.next()*80
+    else
+       x=x=+random.next()*80*-1
+    end end
+  // random asteriod
+  if 1==1 then
+  if y==224 then
+    asteriod_odd=random.next(2)
+      S=40 S=S*random.next()*2+10
+      if asteriod_odd>0.5 then
+      asteriod="carbonaceous_asteriod"
+      elsif asteriod_odd<0.1 then
+      asteriod="metal_asteriod" 
+      elsif asteriod_odd>0.1 and asteriod_odd<0.3 then
+      asteriod="metalic_asteriod"end
+      if y==224 then
+      asteriod_odd=random.next(2)
+      S=40 S=S*random.next()*2+10
+      if asteriod_odd>0.3 and asteriod_odd<0.5 then
+       asteriod="stony_asteriod" end end end
+  // random asteriod
+ 
+    
+  end
+  if power>1 then
+  if 1==1 then
+  if keyboard.LEFT or LEFT==true then
+    pivot=pivot+1 end
+   if keyboard.RIGHT or RIGHT==true then
+     pivot=pivot-1 end end end
+    if beemy>220 or beemx>100 or beemx<-100 then beemx=500 beemy=221 end
+    if beem_good==1 then
+    if beemy<220 then 
+      beemy=beemy+cosd(pivot1)*(0+speed) beemx=beemx+cosd(pivot1+90)*(0+speed)
+      else beemy=base+10 beemyx=0 beemx=0 end  end  end
+      
+  if beem_good==1 then if beemy>220 or  beemx>100 or beemx<-100 then beem_good=0 end end  
+ end
+ if clock>1 then after 0.001 seconds do clock=1 end end 
+
+    
+ end
+
+draw = function()
+  
+   if 1==1 then
+     if beem_good==0 then pivot1=pivot end
+   screen.fillRect(0,0,200,400,"#1128")
+   if clock==1.5 then screen.fillRect(0,0,200,400,"#1128") end
+   screen.fillRect(0,-200,200,70,"#6768")
+   screen.drawSprite(asteriod,x,y,S)
+   screen.drawSprite("gunner_base",0,base,40)
+   screen.setDrawRotation(pivot1 -90)
+   screen.drawSprite(BEEM,beemx,beemy,30)
+   screen.setDrawRotation(0)
+   screen.setDrawRotation(pivot)
+   screen.drawSprite("gunner_pivot",0,base+10,40)
+   if beem_good==1 and speed<=2 then screen.drawSprite("pivothot",0,base+10,40) end
+   if sidelasers==true and heat==0 then screen.drawSprite("copperheat1",0,base+10,40) end
+   if sidelasers==true and heat==1 then screen.drawSprite("copperheat2",0,base+10,40) end
+   if sidelasers==true and heat==2 then screen.drawSprite("copperheat3",0,base+10,40) end
+   if sidelasers==true and active==0 then screen.drawSprite("sidelaser",0,base+10,40) end
+   if sidelasers==true and active==1 then screen.drawSprite("sidelasers",0,base+10,40) end 
+    screen.setDrawRotation(0)
+    end
+     
+   //upgrade sprites
+   if 1==1 then
+  if coppertube1==true then screen.drawSprite("copper_tube",-25,-152,50) end 
+  if co2tank==true then screen.drawSprite("co2tank",-84,-128,15) end
+  if hydrogentank==true then screen.drawSprite("hydrogen_tank",-47,-128,13) end
+  if oxygentank==true then screen.drawSprite("oxygen_tank",-31,-132,13) end
+  if electrowire==true and coppertube1==false and waterstorage==true then screen.drawSprite("electrolysis_wire",-38.6,-142,50) end
+  if electrowire==true and coppertube1==true and waterstorage==true then screen.drawSprite("electrolysis_wire2",-38.6,-142,50)end
+  if carbonlaser==true and laser==false then  screen.drawSprite("carbonlaser",-85,-152,50) screen.drawSprite("laseroff",-85,-152,50) 
+      elsif carbonlaser==true and laser==true and clh>1 then screen.drawSprite("carbonlaseractive",-85,-152,50) screen.drawSprite("laseron",-85,-152,50) 
+      elsif carbonlaser==true and laser==true and clh=1 then screen.drawSprite("carbonlaseractivedmg",-85,-152,50) screen.drawSprite("laseron",-85,-152,50)  end
+  if co2staby==true then  screen.drawSprite("co2sabiter",-63,-135,50) end 
+  if oxygenlaser==true then screen.drawSprite("oxygenlaser",-58.26,-134,60) end 
+   if staby==true then screen.drawSprite("sabiter",-56.5,-152,50) 
+   if sheat==1 then screen.drawSprite("stabyheater1",-56.5,-152,50)
+   elsif sheat==2 then screen.drawSprite("stabyheater2",-56.5,-152,50) 
+   elsif sheat>=3 then screen.drawSprite("stabyheater3",-56.5,-152,50) end  end
+   if hydrogenstaby==true then  screen.drawSprite("hydrogensabiter",-56.5,-135,50) end
+   if waterstorage==true and hydrogentank==true and oxygentank==true and electrowire==true then  
+   screen.drawSprite("electrooff",-38.6,-152,50)end
+    if methanetank==true then screen.drawSprite("methanetank",-75,-182,50) end
+    if stabymethane==true then screen.drawSprite("stabymethane",-48.8,-172,25) end
+    if staby==true and stabyon==false  then screen.drawSprite("stabyoff",-56.5,-152,50) end
+    if staby==true and stabyon==true  then screen.drawSprite("stabyon",-56.5,-152,50) end
+    //
+    //rocket
+  if base>-153 then screen.drawSprite("hole",-0,-153-37,40) end
+   if rocketbody==true then screen.drawSprite("rocketbody",-0,base-37,40) end
+     if rocketbody==true and launch==false then base=-143  end
+     if launch==true then base=base+1  end
+     if launch==true and clock==1.5 then methfuel=methfuel-1 oxyfuel=oxyfuel-1 end
+     if launch==true then if  methfuel<1 or oxyfuel<1 then launch=false rocketbody=false end end
+  
+     if clock==1.25 then after 0.1 seconds do if fire1==true then fire2=true fire1=false end end end
+     if clock==1.25 then after 0.4 seconds do if fire1==false then fire2=false fire1=true end end end
+     
+     if launch==true and fire1==true then  screen.drawSprite("fire1",-0,base-68,40) end
+     if launch==true and fire2==true  then screen.drawSprite("fire2",-0,base-68,40) end
+     if lbutton==true then screen.drawSprite("launchbutton",80,-140,60) end
+     if launch==true then screen.drawSprite("launchedbutton",80,-140,60) end
+    
+      //
+      if rocketbody==true then
+         if methfuel>=1 and methfuel<2 then screen.drawSprite("metho1",-0,base-37,40)   
+         elsif methfuel>=2 and methfuel<3 then screen.drawSprite("metho2",-0,base-37,40) 
+         elsif methfuel>=3 and methfuel<4 then screen.drawSprite("metho3",-0,base-37,40)  
+         elsif methfuel>=4 and methfuel<5then screen.drawSprite("metho4",-0,base-37,40)  
+         elsif methfuel>=5 and methfuel<6then screen.drawSprite("metho5",-0,base-37,40)  
+         elsif methfuel>=6 then screen.drawSprite("metho6",-0,base-37,40)  
+         end
+         if oxyfuel>=1 and methfuel<2 then screen.drawSprite("oxym1",-0,base-37,40)   
+         elsif oxyfuel>=2 and oxyfuel<3 then screen.drawSprite("oxym2",-0,base-37,40) 
+         elsif oxyfuel>=3 and oxyfuel<4 then screen.drawSprite("oxym3",-0,base-37,40)  
+         elsif oxyfuel>=4 and oxyfuel<5then screen.drawSprite("oxym4",-0,base-37,40)  
+         elsif oxyfuel>=5 and oxyfuel<6 then screen.drawSprite("oxym5",-0,base-37,40)  
+         elsif oxyfuel>=6 then screen.drawSprite("oxym6",0,base-37,40)  
+         end
+   end
+      //
+       if sendmeth==true and clock==1.5 and methane>0 then methfuel=methfuel+1 methane=methane-2 end
+       if sendoxy==true and clock==1.5 and oxygen>0 then  oxyfuel=oxyfuel+1 oxygen=oxygen-2 end
+       if methf==true then if sendmeth==false then screen.drawSprite("methfuel",-40,-183,70)end if sendmeth==true then screen.drawSprite("methfuelactive",-40,-183,70)end end
+       if oxyf==true then if sendoxy==false then screen.drawSprite("oxyfuel",-15,-150,70) end  if sendoxy==true then screen.drawSprite("oxyfuelactive",-15,-150,70) end end
+      
+     
+    //rocket
+    // stabyanimation
+    if sheat>=3 and hydrogen>=4 and co2>=1 and co2staby==true and hydrogenstaby==true and work==90 then
+    if stabyA>0.8 then stabyA=0 end
+    if staby==true and stabyA<=0.2 and stabyA>=0 then screen.drawSprite("staby1",-56.5,-152,50) end
+    if staby==true and stabyA<=0.4 and stabyA>=0.2 then screen.drawSprite("staby2",-56.5,-152,50) end
+    if staby==true and stabyA<=0.6 and stabyA>=0.4 then screen.drawSprite("staby3",-56.5,-152,50) end
+    if staby==true and stabyA<=0.8 and stabyA>=0.6 then screen.drawSprite("staby4",-56.5,-152,50) end
+    if staby==true and clock==1.25 then stabyA=stabyA+0.2 after 0.25 second do stabyA=stabyA+0.2 end end
+    if staby==true and stabyA>0.8 then stabyA=0 end
+    end
+    // stabyanimation
+    end
+
+  // upgrade sprites
+ 
+  
+  //shop text
+  //materials text
+     if work==5 then
+     if water>=1 then screen.drawText("water:"+ water,-0,190,20, "rgba(30,300,300)") end
+     if carbon>=1 then screen.drawText("carbon:"+ carbon,-60,170,20, "rgba(60,60,60)") end
+     if silicon>=1 then screen.drawText("silicon:"+ silicon,-60,140,20, "rgba(30,300,150)") end
+     if nickel>=1 then screen.drawText("nickel:"+ nickel,-60,110,20, "rgba(200,200,200)") end
+     if copper>=1 then  screen.drawText("copper:"+ copper,-60,80,20, "rgba(300,150,30)")end
+    if iron>=1 then screen.drawText("iron:"+iron,-70,50,20, "rgba(120,120,120)")end
+    if co2>=1 then screen.drawText("CO2:"+ co2,70,170,20, "rgba(30,30,0)")end
+    if methane>=1 then screen.drawText("methane:"+ methane,50,140,20, "rgba(125,200,0)")end
+    if oxygen>=1 then screen.drawText("Oxygen:"+ oxygen,55,110,20, "rgba(365,0,0)")end
+    if hydrogen>=1 then screen.drawText("Hydrogen:"+ hydrogen,46,80,20, "rgba(150,300,3000)")end
+   end
+  //materials text
+   //purchasetext
+   if tutorG==true then
+   if work==5 and waterstorage==false then screen.drawText("water storage",-56,-120,10, "rgba(100,100,100)")end
+    if waterstorage==false and work==5 then screen.drawText( iron+"/5",-56,-110,10, "rgba(100,100,100)")end 
+    if work==5 and solar==false then screen.drawText("solar panel "   ,50,-125,10, "rgba(150,200,100)") end
+    if work==5 and solar==false then screen.drawText( copper +"/4"   ,30,-115,10, "rgba(200,100,30)") end
+    if work==5 and solar==false then screen.drawText(  iron+ "/2"  ,50,-115,10, "rgba(150,150,150)") end
+    if work==5 and solar==false then screen.drawText( silicon +"/4  "   ,70,-115,10, "rgba(30,300,150)") end
+  if work==5 and hydrogentank==false and waterstorage==true and solar==true then screen.drawText("hydrogen tank",-60,-110,10, "rgba(150,140,110)") end
+    if work==5 and hydrogentank==false and waterstorage==true and solar==true then screen.drawText(+iron+"/6 ",-70,-100,10, "rgba(150,150,150)") end
+        if work==5 and hydrogentank==false and waterstorage==true and solar==true then screen.drawText(+copper+"/2",-50,-100,10, "rgba(200,100,30)") end
+  if work==5 and oxygentank==false and waterstorage==true and solar==true then screen.drawText("oxygen tank",-2,-120,10, "rgba(140,120,80)") end
+      if work==5 and oxygentank==false and waterstorage==true and solar==true then screen.drawText(+iron+"/4 ",-10,-110,10, "rgba(150,150,150)") end
+        if work==5 and oxygentank==false and waterstorage==true and solar==true then screen.drawText(+copper+"/2",10,-110,10, "rgba(200,100,30)") end
+ if work==5 and electrowire==false and waterstorage==true and solar==true then screen.drawText("wire",-40,-135,10, "rgba(200,100,30)") end
+  if work==5 and electrowire==false and waterstorage==true and solar==true then screen.drawText(copper+"/3",-40,-128,10, "rgba(200,100,30)") end
+    if work==5 and carbonlaser==false and waterstorage==true and solar==true and coppertube=true then screen.drawText("carbon burner",-75,-148,7.8, "rgba(120,150,130)") end
+        if work==5 and carbonlaser==true and co2tank==false then screen.drawText("co2 tank",-83,-125,9, "rgba(140,120,80)") end
+        if work==5 and carbonlaser==true and co2tank==false then screen.drawText(iron+"/5",-77,-120,9, "rgba(150,150,150)") end
+        if work==5 and carbonlaser==true and co2tank==false then screen.drawText(copper+"/2",-90,-120,9, "rgba(200,100,30)") end
+        //oxygenpipe
+        if work==5 and carbonlaser==true and co2tank==true and oxygentank==true and oxygenlaser==false then screen.drawText("oxygen",-63,-130,9, "rgba(500,120,80)") end
+        if work==5 and carbonlaser==true and co2tank==true and oxygentank==true and oxygenlaser==false then screen.drawText("pipe",-61,-136,9, "rgba(500,120,80)") end
+        if work==5 and carbonlaser==true and co2tank==true and oxygentank==true and oxygenlaser==false then screen.drawText(copper+"/3",-61,-125,9, "rgba(200,100,30)") end
+        //oxygenpipe
+        //
+    if work==5 and carbonlaser==false and waterstorage==true and solar==true and coppertube==true then screen.drawText(iron+"/5",-67,-138,8, "rgba(150,150,150)") end
+        if work==5 and carbonlaser==false and waterstorage==true and solar==true and coppertube==true then screen.drawText(silicon+"/2",-87,-138,8, "rgba(30,300,150)") end
+        if work==5 and sidelasers==false and waterstorage==true and solar==true and oxygentank==true and hydrogentank==true and coppertube1==true then screen.drawText("side lasers",-0,-130,8, "rgba(150,180,80)") end
+        if work==5 and sidelasers==false and waterstorage==true and solar==true and oxygentank==true and hydrogentank==true and coppertube1==true then screen.drawText(silicon+"/5",-10,-138,8, "rgba(30,300,150)") end
+        if work==5 and sidelasers==false and waterstorage==true and solar==true and oxygentank==true and hydrogentank==true and coppertube1==true then screen.drawText(iron+"/6",+10,-138,8, "rgba(150,150,150)") end
+        if work==5 and sidelasers==false and waterstorage==true and solar==true and oxygentank==true and hydrogentank==true and coppertube1==true then screen.drawText(copper+"/2",0,-124,8, "rgba(200,100,30)") end
+        if work==5 and carbonlaser==true and waterstorage==true and solar==true and oxygentank==true and hydrogentank==true and coppertube1==true and co2tank==true and electrowire==true and oxygenlaser==true then  
+          if staby==false then stabytext=true screen.drawText("Sabatier",-65,-110,8, "rgba(200,2000,2000)") end 
+          if staby==false then screen.drawText("reactor",-64.0,-116,7.8, "rgba(200,2000,2000)") end 
+          if staby==false then screen.drawText(nickel+"/4",-73.0,-105,7.8, "rgba(200,200,200)") end
+          if staby==false then screen.drawText(iron+"/5",-58.0,-105,7.8, "rgba(150,150,150)") end 
+          if staby==false then screen.drawText(copper+"/3",-64.0,-121,7.8, "rgba(200,100,30)") end 
+          if staby==true then 
+           if hydrogenstaby==false then hydrogenpipetext=true screen.drawText("hydrogen",-55,-115,6, "rgba(250,2000,2000)") end 
+           if hydrogenstaby==false then screen.drawText("pipe",-59,-120,6, "rgba(250,2000,2000)") end
+           if hydrogenstaby==false then screen.drawText("3/" +copper,-60,-125,6, "rgba(200,100,30)") end
+           if co2staby==false then co2pipetext=true screen.drawText("co2",-73,-115,6, "rgba(80,80,50)") end 
+           if co2staby==false then screen.drawText("pipe",-70,-120,6, "rgba(80,80,50)") end
+           if co2staby==false then screen.drawText("3/" +copper,-73,-110,6, "rgba(200,100,30)") end
+           if methanetank==false then screen.drawText("methane" ,-70,-180,6, "rgba(150,170,140)") end
+           if methanetank==false then screen.drawText("tank" ,-70,-185,6, "rgba(150,170,140)") end
+           if methanetank==false then screen.drawText(iron+"/8" ,-70,-190,6, "rgba(150,150,150)") end
+           if stabymethane==false then screen.drawText("methane" ,-40,-170,6, "rgba(121,170,140)") end
+           if stabymethane==false then screen.drawText("pipe" ,-40,-175,6, "rgba(121,170,140)") end
+           if stabymethane==false then screen.drawText(copper+"/3" ,-40,-180,6, "rgba(200,100,30)") end
+           if stabymethane==true and co2staby==true and hydrogenstaby==true then
+           if rocketbody==false then screen.drawText("rocket base" ,-0,-185,10, "rgba(300,300,300)") end
+           if rocketbody==false then screen.drawText(copper+"/5" ,-8,-192,10, "rgba(200,100,30)") end
+           if rocketbody==false then screen.drawText(iron+"/12" ,-0,-180,10, "rgba(150,150,150)") end
+           if rocketbody==false then screen.drawText(silicon+"/3" ,8,-192,10, "rgba(30,300,150)") end 
+           if rocketbody==true then
+            if methf==false then  screen.drawText("methane " ,-36,-176,8, "rgba(121,200,0)")
+           screen.drawText("rocket " ,-36,-180,8, "rgba(121,200,0)")
+            screen.drawText(" feed " ,-36,-186,8, "rgba(121,200,0)") 
+           screen.drawText(copper+"/5" ,-36,-192,10, "rgba(200,100,30)")  end
+          
+            if oxyf==false then  screen.drawText("oxygen " ,-16,-115,8, "rgba(255,142,142)")
+           screen.drawText("rocket" ,-16,-120,8, "rgba(255,142,142)")
+            screen.drawText(" feed " ,-16,-126,8, "rgba(255,142,142)") 
+           screen.drawText(copper+"/5" ,-16,-109,10, "rgba(200,100,30)")  end
+
+         
+         end
+           
+           end end
+        end
+        end
+   //purchasetext
+   // waterfill animation
+    if waterstorage==true then if water<1 then screen.drawSprite("water_storage",-40,-152,50) 
+    elsif water==1 then screen.drawSprite("ws1",-40,-152,50) 
+    elsif water==2 then screen.drawSprite("ws2",-40,-152,50)
+    elsif water==3 then screen.drawSprite("ws3",-40,-152,50)
+    elsif water==4 then screen.drawSprite("ws4",-40,-152,50)
+    elsif water==5 then screen.drawSprite("ws5",-40,-152,50)
+    elsif water==6 then screen.drawSprite("ws6",-40,-152,50)
+    elsif water==7 then screen.drawSprite("ws7",-40,-152,50)
+    elsif water==8 then screen.drawSprite("ws8",-40,-152,50)
+    elsif water==9 then screen.drawSprite("ws9",-40,-152,50)
+    elsif water==10 then screen.drawSprite("ws10",-40,-152,50)
+    elsif water==11 then screen.drawSprite("ws11",-40,-152,50)
+    elsif water==12 then screen.drawSprite("ws12",-40,-152,50)
+    elsif water==13 then screen.drawSprite("ws13",-40,-152,50)
+    elsif water>=14 then screen.drawSprite("ws14",-40,-152,50)
+    end 
+    if work==5 and coppertube1==false then screen.drawText("copper tube" ,-10,-145,10, "rgba(200,100,30)") end    /
+    if work==5 and coppertube1==false then screen.drawText(copper+"/2" ,-10,-135,10, "rgba(200,100,30)") end end
+   // waterfill animation
+   //copy
+     if electrowire==true and coppertube1==false and waterstorage==true then screen.drawSprite("electrolysis_wire",-38.6,-142,50) end
+     if electrowire==true and coppertube1==true and waterstorage==true then screen.drawSprite("electrolysis_wire2",-38.6,-142,50)end
+      if waterstorage==true and hydrogentank==true and oxygentank==true and electrowire==true and electro==false then screen.drawSprite("electrooff",-40,-152,50)end
+      if waterstorage==true and hydrogentank==true and oxygentank==true and electrowire==true and electro==true then screen.drawSprite("electroon",-40,-152,50)end
+
+   //copy
+  //ect 
+     if 1==1 then
+   if waterstorage==false then oxygentank=false hydrogentank=false electrowire=false coppertube1=false end
+  if oxygentank==false or carbonlaser==false then oxygenlaser=false end
+   end
+  //ect
+  //shop text
+  //
+  //animation
+   if 1==1 then
+         if carbon>=5 and carbon<10 then screen.drawSprite("carbon1",-85,-152,50)   
+         elsif carbon>=10 and carbon<20 then screen.drawSprite("carbon2",-85,-152,50) 
+         elsif carbon>=20 and carbon<30 then screen.drawSprite("carbon3",-85,-152,50)  
+         elsif carbon>=30 and carbon<40 then screen.drawSprite("carbon4",-85,-152,50)  
+         elsif carbon>=40 and carbon<60 then screen.drawSprite("carbon5",-85,-152,50)  
+         elsif carbon>=60 then screen.drawSprite("carbon6",-85,-152,50)  
+           
+         end 
+            if methane>=2 and methane<4 then screen.drawSprite("methane1",-75,-182,50)   
+         elsif methane>=4 and methane<6 then screen.drawSprite("methane2",-75,-182,50) 
+         elsif methane>=6 and methane<8 then screen.drawSprite("methane3",-75,-182,50)  
+         elsif methane>=8 and methane<10then screen.drawSprite("methane4",-75,-182,50)  
+         elsif methane>=10 then screen.drawSprite("methane5",-75,-182,50)  
+         end
+         
+   end
+  //
+  //animation
+  //upgrade's health
+  if 1==1 then
+  if coppertube1==true then if cth==3 then screen.drawSprite("ctdamage1",-25,-152,50)  
+  elsif cth==2 then screen.drawSprite("ctdamage2",-25,-152,50)
+      elsif cth==1 then screen.drawSprite("ctdamage3",-25,-152,50) end end
+  if waterstorage== true then if wsh==5 then screen.drawSprite("wsdamage1",-40,-152,50) 
+  elsif wsh==4 then screen.drawSprite("wsdamage2",-40,-152,50) 
+  elsif wsh==3 then screen.drawSprite("wsdamage3",-40,-152,50) 
+  elsif wsh==2 then screen.drawSprite("wsdamage4",-40,-152,50)
+  elsif wsh==1 then screen.drawSprite("wsdamage5",-40,-152,50) end end
+  if carbonlaser== true then
+  if clh==3 then screen.drawSprite("cldamage1",-85,-152,50) 
+  elsif clh==2 then screen.drawSprite("cldamage2",-85,-152,50) 
+  elsif clh==1 then screen.drawSprite("cldamage3",-85,-152,50)
+  end end
+  if solar==true then screen.drawSprite("solar",50,-125,80) end
+  if sh<5 then
+     if sh==4 then SE=0.15
+  elsif sh==3 then SE=0.07 screen.drawSprite("solardmg1",50,-125,80)
+  elsif sh==2 then SE=0.05 screen.drawSprite ("solardmg2",50,-125,80) 
+  elsif sh==1 then SE=0.03 screen.drawSprite("solardmg3",50,-125,80) end end
+    if sth<4 then 
+     if sth==4 then screen.drawSprite("stabydmg1",-56.5,-152,50)
+  elsif sth==3 then screen.drawSprite ("stabydmg2",-56.5,-152,50) 
+  elsif sth==2 then screen.drawSprite ("stabydmg3",-56.5,-152,50) 
+  elsif sth==1 then screen.drawSprite("stabydmg4",-56.5,-152,50,) end end
+  if wsh<1 then waterstorage=false end
+  if cth<1 then coppertube1=false end
+  if sh<1 then solar=false end
+  if clh<1 then carbonlaser=false end
+  if sth<1 then staby=false end
+  if carbonlaser==false then co2tank=false end
+  if staby==false then co2staby=false hydrogenstaby=false stabymethane=false end
+  end
+  //upgrade's health
+  //
+  // upgrade damage detection
+  if 1==1 then
+ if waterstorage==true then if -152 <=ASTERIOD.Y and -152>=ASTERIOD.Y-HB and clock==1.25 or -152>=ASTERIOD.Y  and -152<=ASTERIOD.Y+HB and clock==1.25  then if -40<=ASTERIOD.X and -40>=ASTERIOD.X-HB and clock==1.25 or -40>=ASTERIOD.X  and -40<=ASTERIOD.X+HB and clock==1.25 then wsh=wsh-1 asteriodhit=true end end end  
+ if coppertube1==true then if -152 <=ASTERIOD.Y and -152>=ASTERIOD.Y-HB and clock==1.25 or -152>=ASTERIOD.Y  and -152<=ASTERIOD.Y+HB and clock==1.25  then if -35<=ASTERIOD.X and -35>=ASTERIOD.X-HB and clock==1.25 or -35>=ASTERIOD.X  and -35<=ASTERIOD.X+HB and clock==1.25 then cth=cth-1 asteriodhit=true  end end end
+ if solar==true then if -125 <=ASTERIOD.Y and -125>=ASTERIOD.Y-HB and clock==1.25 or -125>=ASTERIOD.Y  and -125<=ASTERIOD.Y+HB and clock==1.25  then if 50<=ASTERIOD.X and 50>=ASTERIOD.X-HB and clock==1.25 or 50>=ASTERIOD.X  and 50<=ASTERIOD.X+HB and clock==1.25 then sh=sh-1 asteriodhit=true  end end end
+  if carbonlaser==true then if -152 <=ASTERIOD.Y and -152>=ASTERIOD.Y-HB and clock==1.25 or -152>=ASTERIOD.Y  and -152<=ASTERIOD.Y+HB and clock==1.25  then if -85<=ASTERIOD.X and -85>=ASTERIOD.X-HB and clock==1.25 or -85>=ASTERIOD.X  and -85<=ASTERIOD.X+HB and clock==1.25 then clh=clh-1 asteriodhit=true  end end end
+  if staby==true then if -152 <=ASTERIOD.Y and -152>=ASTERIOD.Y-HB and clock==1.25 or -152>=ASTERIOD.Y  and -152<=ASTERIOD.Y+HB and clock==1.25  then if -61<=ASTERIOD.X and -61>=ASTERIOD.X-HB and clock==1.25 or -61>=ASTERIOD.X  and -61<=ASTERIOD.X+HB and clock==1.25 then sth=sth-1 asteriodhit=true  end end end
+  end
+  // upgrade damage detection
+  //
+  //power
+  if 1==1 then
+  if solar==true and clock==1.5 and work==90 and power<=12.91 then power=power+SE end
+  if clock==1.5 and work==90 and clear==true then power=power -0.02 end
+  if keyboard.UP and clock==1.5 and work==90 and clear==true then power=power -0.2  end
+  if beem_good==1 and clock==1.5 and work==90 and clear==true then power=power-0.04 end
+  if heat>=2 and clock==1.5 and work==90 then  power=power-0.8 end
+  if sheat>=2 and clock==1.5 and work==90 then  power=power-0.2 end
+   if laser==true and clock==1.5 and work==90 then  power=power-0.2 end
+   
+   if power>1 then 
+    if power>=12 then screen.drawSprite("battery1",0,base,40) 
+    elsif power<12 and power>11 then screen.drawSprite("battery2",0,base,40)
+    elsif power<11 and power>10 then screen.drawSprite("battery3",0,base,40)
+    elsif power<10 and power>9 then screen.drawSprite("battery4",0,base,40)
+    elsif power<9 and power>8 then screen.drawSprite("battery5",0,base,40)
+    elsif power<8 and power>7 then screen.drawSprite("battery6",0,base,40)
+    elsif power<7 and power>6 then screen.drawSprite("battery7",0,base,40)
+    elsif power<6 and power>5 then screen.drawSprite("battery8",0,base,40)
+    elsif power<5 and power>4 then screen.drawSprite("battery9",0,base,40)
+    elsif power<4 and power>3 then screen.drawSprite("battery10",0,base,40)
+    elsif power<3 and power>2then screen.drawSprite("battery11",0,base,40)
+    elsif power<2 and power>1 then screen.drawSprite("battery12",0,base,40) end end
+    end
+  //power
+  //
+  //on sensing
+   if electro==true and waterstorage==true and electrowire==true and oxygentank==true and hydrogentank==true then electro=true  else electro=false end 
+  //on sensing
+  //
+  //electrolysis
+  if 1==1 then
+    if electro==true and water>=5 and clock==1.5 and work==90 and waterstorage==true and electrowire==true and oxygentank==true and hydrogentank==true then water=water-1   hydrogen=hydrogen+2  oxygen=oxygen+1 power=power-0.2 end 
+     if hydrogentank==true then 
+    if hydrogen<2 then screen.drawSprite("hydrogengas",-47,-128,13) 
+    elsif hydrogen<4 then screen.drawSprite("hydrogengas2",-47,-128,13)
+    elsif hydrogen<8 then screen.drawSprite("hydrogengas3",-47,-128,13)
+    elsif hydrogen<16 then screen.drawSprite("hydrogengas4",-47,-128,13)
+    elsif hydrogen<=31 then screen.drawSprite("hydrogengas5",-47,-128,13)
+    elsif hydrogen>31 then screen.drawSprite("hydrogengas6",-47,-128,13)
+    end
+     end
+  if oxygentank==true then 
+    if oxygen<1 then screen.drawSprite("oxygengas",-31,-132,13) 
+    elsif oxygen<2 then screen.drawSprite("oxygengas1",-31,-132,13)
+    elsif oxygen<4 then screen.drawSprite("oxygengas2",-31,-132,13)
+    elsif oxygen<8 then screen.drawSprite("oxygengas3",-31,-132,13)
+    elsif oxygen<=16 then screen.drawSprite("oxygengas4",-31,-132,13)
+    elsif oxygen>16 then screen.drawSprite("oxygengas5",-31,-132,13)
+    end
+  end
+  if hydrogentank==true then 
+    if co2>=2 and co2<=4 then screen.drawSprite("co2gas1",-84,-128,15) 
+    elsif co2>=4  and co2<=6 then screen.drawSprite("co2gas2",-84,-128,15)
+    elsif co2>=6 and co2<=10 then screen.drawSprite("co2gas3",-84,-128,15)
+    elsif co2>=10  and co2<=20 then screen.drawSprite("co2gas4",-84,-128,15)
+    elsif co2>=20 then screen.drawSprite("co2gas5",-84,-128,15)
+    end end
+    end
+  //electrolysis
+  //
+  //sabiter reaction
+  if work==90 then
+  if staby==true and co2staby==true and hydrogenstaby==true then
+  if stabyon==true and clock==1.5 and sheat<=3 then sheat=sheat+1 end
+  if stabyon==false and clock==1.5 and sheat>1 then sheat=sheat-1 end
+  if sheat>3 then sheat=3
+  if sheat==3 and clock==1.5 then if hydrogen>=4 and co2>=1 then hydrogen=hydrogen-4 co2=co2-1 methane=methane+1 water=water+1  end end
+  end end end
+  //sabiter reaction
+  //
+  // material limits
+  if 1==1 then
+  if carbonlaser==false then carbon=0 end
+  if waterstorage==false then water=0 end
+  if co2tank==false then co2=0 end
+  if oxygentank==false then oxygen=0 end
+  if hydrogentank==false then hydrogen=0 end
+  end
+  // material limits
+  //
+  //keyboard inputs
+  if 1==1 then
+   if work==90 and coppertube1==true and waterstorage==true  and clock==1.5 and water>0 and keyboard.UP then after 0.001 seconds do  speed=speed+3 water=water-1 end  end
+   //laser
+   if clock==1.25 and carbon>=5 and laser==true and work==90 then carbon=carbon-4  if oxygen>=2 then co2=co2+1 oxygen=oxygen-2 end end
+   // laser
+    if power>1 then if keyboard.SPACE or SPACE==true then after 0.1 seconds do 
+   beem_good=1   end
+   
+    end end
+    
+   if keyboard.R or resume==true then work=90 end
+   if keyboard.E or shop==true then work=5  
+   if R==1 then work=1 end 
+   end  
+   end
+  //keyboard inputs
+  //
+  //devtools
+  if 1==1 then
+  if keyboard.D and keyboard.M then devmode=true end
+    if devmode==true then  end
+  if devmode==true then
+   if infinte==true then
+  if clock==1.25 then
+  carbon=carbon+1
+  water=water+1
+  silicon=silicon+1
+  nickel=nickel+1
+  iron=iron=iron+1
+  copper=copper+1
+  gold=gold+1  end end
+   if devmode==true and keyboard.I then infinte=true end
+   if devmode==true and keyboard.press.S and keyboard. D then speedS=speedS+1 end 
+   if keyboard.A and keyboard.C then asteriod="carbonaceous_asteriod" end
+   if keyboard.A and keyboard.S then asteriod="stony_asteriod" end
+   if keyboard.A and keyboard.M and keyboard.C then asteriod="metalic_asteriod" end
+   if keyboard.A and keyboard.M and keyboard.L then asteriod="metal_asteriod" end end
+ end
+  //devtools
+
+ //
+ //start screen
+ //
+ //tutorial
+ //
+ //tutoriallogic
+ if tutorG==true then test=false end
+ if tutorG==false then
+ if tutor==0 then end
+ if tutor==1 then
+   after 5 seconds do tutor=2 T2C=time end end
+ if tutor==2 then if (T2C-time)<-1 then tutor=3 T3C=time end end
+ if tutor==3 then if keyboard.RIGHT or keyboard.LEFT or mobile==true then if (T3C-time)<-2 then tutor=4 T4C=time end end end
+ if tutor==4 then if beem_good==1 then if (T4C-time)<-1 then tutor=5 end end end
+ if tutor==5 then if work==5 then tutor=6 T6C=time end end
+  if tutor==6 then if (T6C-time)<-4 then tutor=7 end end
+  if tutor==7 and test==true then tutor=8 end
+  if tutor==8 then if work==90 then tutor=9 end end 
+  if tutor==9 then if teston==true and y>100 then x=55 end end
+  if tutor==9 and x==55 and y==-150 then testdmg=true tutor=10 T10C=time end
+  if tutor==10 then if (T10C-time)<-4 then  tutor=11 end end
+   if tutor==11 then if work==5 then tutor=12 end end
+  if tutor==12 then if mousetype==1 then tutor=13 T13C=time end end
+    if tutor==13 then if (T13C-time)<-4 then tutor=14 end end
+    if tutor==14 then if testdmg==false then tutor=15 T15C=time end end
+    if tutor==15 then if (T15C-time)<-4 then tutor=16 T16C=time end end
+    if tutor==16 then if (T16C-time)<-5 then tutor=17 T17C=time end end
+    if tutor==17 then if (T17C-time)<-7 then tutor=18 end end 
+    if tutor==18 then if shots>S/IG then tutor=19 T19C=time end end
+    if tutor==19 then if (T19C-time)<-7 then tutor=20 T20C=time end end 
+    if tutor==20 then if (T20C-time)<-4 then tutor=21 end end 
+    if tutor==21 then tutor=0 tutorG=true init()  end 
+//ect
+if tutorG==false and tutor>6 then if work==5 and test==false then screen.drawText("TEST",58,-100,15, "rgba(300,100,100)") end
+ if test==true then screen.drawSprite("test",60,-115,100) end end
+   if testdmg==true and test==true then screen.drawSprite("testdmg",60,-115,100) end
+  //test purchase
+  if -101 <=mouse.y and -101>=mouse.y-5 or -101>=mouse.y  and -101<=mouse.y+5 then 
+  if 58<=mouse.x and 58>=mouse.x-10 or 58>=mouse.x and 58<=mouse.x+10  then 
+ if mouse.press then test=true end end end 
+  //test purchase
+  //test button
+    if -145 <=mouse.y and -145>=mouse.y-3 or -145>=mouse.y  and -145<=mouse.y+3 then 
+  if 58<=mouse.x and 58>=mouse.x-3 or 58>=mouse.x and 58<=mouse.x+3  then 
+ if mouse.press then if teston==false then  teston=true else teston=false end end end end 
+  //test button
+  //test fix
+  if mousetype==1 then if -150 <=mouse.y and -150>=mouse.y-8 or -150>=mouse.y  and -150<=mouse.y+8 then 
+  if 58<=mouse.x and 58>=mouse.x-8 or 58>=mouse.x and 58<=mouse.x+8  then 
+ if mouse.press then testdmg=false end end end end
+  //test button
+   if test==true and teston==false then screen.drawSprite("testoff",57,-170,100) end
+ if test==true and teston==true then screen.drawSprite("teston",57,-170,100) end
+  //test fix
+//ect
+//tutoriallogic
+end
+ //
+ //tutorial text
+ if tutorG==false then
+ if tutor==1 then
+ screen.drawText("welcome to asteriod hunter",0,10,15, "rgba(300,100,100)")end
+  if tutor==2 then
+    screen.drawText("this is the tutorial",0,10,15, "rgba(300,300,300)") end
+ if tutor==3 then
+   screen.drawText("press A and D or arrow keys",0,10,15, "rgba(150,300,150)")
+   screen.drawText("to aim turret",0,0,15, "rgba(150,300,150)") end
+ 
+if tutor==4 then
+  screen.drawText("press space to shoot lasers",0,10,15, "rgba(30,300,30)")
+   screen.drawText("or in mobile hover over asteriod",0,0,15, "rgba(30,300,30)")end
+ if tutor==5 then
+   screen.drawText("press E or if mobile",0,10,15, "rgba(100,100,300)") 
+    screen.drawText("click shop button",0,0,15, "rgba(100,100,300)") end
+if tutor==6 then
+  screen.drawText("this is the shop",0,10,15, "rgba(200,300,230)")
+   screen.drawText("here you can buy upgrades ",0,0,15, "rgba(200,300,300)")
+  screen.drawText(" and see your materials",0,-10,15, "rgba(200,300,300)")end
+ if tutor==7 then
+   screen.drawText("down here you will find ",0,-50,15, "rgba(100,300,300)") 
+     screen.drawText("the upgrades click the",0,-60,15, "rgba(100,300,300)")e
+    screen.drawText("upgrade with your mouse to ",0,-70,15, "rgba(100,300,300)") 
+      screen.drawText(" purchase it",0,-80,15, "rgba(100,300,300)")end 
+if tutor==8 then
+  screen.drawText("this is the test upgrade",0,-10,15, "rgba(30,300,300)")
+    screen.drawText("press R or click resume button",0,-20,15, "rgba(30,300,300)") 
+        screen.drawText("to resume the game",0,-30,15, "rgba(30,300,300)") end
+if tutor==9 then 
+  screen.drawText("click the button on the upgrade",0,10,15, "rgba(30,30,300)")
+   screen.drawText("to turn it on and off",0,0,15, "rgba(30,30,300)") end
+ if tutor==10 then
+   screen.drawText("upgrade was damaged",0,-20,15, "rgba(300,30,300)")   
+    screen.drawText("oh no your",0,-10,15, "rgba(300,30,300)")end 
+ if tutor==11 then 
+   screen.drawText("click E or click the shop button",0,10,15, "rgba(0,200,3000)")
+      screen.drawText(" to enter the shop again",0,0,15, "rgba(0,200,300)")end
+  if tutor==12 then 
+    screen.drawText("hold down your mouse",0,20,15, "rgba(30,350,150)")
+      screen.drawText("to switch to fix mode",0,10,15, "rgba(30,350,150)")end
+  if tutor==13 then 
+    screen.drawText("to fix a upgrade you need ",0,20,15, "rgba(250,350,200)")
+        screen.drawText(" at least 1 of each material used ",0,10,15, "rgba(250,350,150)")
+        screen.drawText("to buy the upgrade",0,0,15, "rgba(250,350,100)")end
+   if tutor==14 then 
+     screen.drawText("click the upgrade to fix it",0,50,15, "rgba(300,300,300)")end
+  if tutor==15 then
+    screen.drawText("run out of power",0,-60,15, "rgba(300,30,30)")
+        screen.drawText("make sure you don't",0,-50,15, "rgba(300,30,30)")end
+  if tutor==16 then
+    screen.drawText("to check your power look",0,-60,15, "rgba(50,300,100)")
+    screen.drawText("at the bar on your turret this ",0,-70,15, "rgba(100,300,100)")
+    screen.drawText(" is how much power you have",0,-80,15, "rgba(150,300,100)")end
+  if tutor==17 then
+    screen.drawText("to check how much power you",0,-50,15, "rgba(300,30,30)")
+        screen.drawText("are using or gaining look at the",0,-60,15, "rgba(200,200,200)")
+            screen.drawText("number below the power bar",0,-70,15, "rgba(30,300,30)")end
+  if tutor==18 then 
+    screen.drawText("shoot down an asteriod",0,10,15, "rgba(150,150,150)")end
+  if tutor==19 then 
+    screen.drawText("not all asteriods are the same",0,20,15, "rgba(100,100,100)")
+    screen.drawText("some are less common ",0,10,15, "rgba(120,200,200)")
+    screen.drawText("some are harder to break and ",0,0,15, "rgba(150,150,100)")
+     screen.drawText("some give diffirent materials",0,-10,15, "rgba(200,100,80)")end
+  if tutor==20 then 
+    screen.drawText("this is the end of the tutorial",0,10,15, "rgba(200,300,300)") end
+   end
+//tutorial text
+//
+//tutorial
+//
+    if start==false then
+    screen.drawSprite("tutorial",60,185,80,) 
+    screen.drawSprite("start",-0,-60,200,) 
+    screen.drawText("tutorial",60,185,15, "rgba(2000,100,100)") 
+     if mobile==false then screen.drawSprite("mobile",-60,185,80,)   screen.drawText("mobile",-60,185,15, "rgba(20,100,1000)")end
+    screen.drawText("click here to start",-0,-60,15, "rgba(300,300,300)")
+    
+    if 182 <=mouse.y and 182>=mouse.y-10 or 182>=mouse.y  and 182<=mouse.y+10 then 
+  if -60<=mouse.x and -60>=mouse.x-20 or -60>=mouse.x and -60<=mouse.x+20  then 
+ if mouse.press then mobile=true end end  
+ end
+    
+    
+     if -58 <=mouse.y and -58>=mouse.y-10 or -58>=mouse.y  and -58<=mouse.y+10 then 
+  if 0<=mouse.x and 0>=mouse.x-60 or 0>=mouse.x and 0<=mouse.x+60  then 
+    if notfirst==false then
+if mouse.press then after 0.1 seconds do tutorprompt=true end end
+if mouse.press and tutorprompt==true then after 0.1 seconds do  tutorprompt2=true tutorprompt= false end end
+if mouse.press and tutorprompt2==true then after 0.1 seconds do  start=true end end  else if mouse.press then start=true end end  end
+ if tutorprompt==true then screen.drawText("do tutorial??",0,10,25, "rgba(300,300,300)") end
+  if tutorprompt2==true then screen.drawText("its in the top",0,20,25, "rgba(300,300,300)") 
+      screen.drawText("right corner",0,0,25, "rgba(300,300,300)") end end
+     if 182 <=mouse.y and 182>=mouse.y-10 or 182>=mouse.y  and 182<=mouse.y+10 then 
+  if 60<=mouse.x and 60>=mouse.x-20 or 60>=mouse.x and 60<=mouse.x+20  then 
+ if mouse.press then start=true tutor=1 tutorG=false end end end 
+ end
+    if tutor>0then clear=true end
+    if start==true and clear==false and tutor<1 then
+    screen.drawText("DO NOT LOSE POWER",-0,-80,20, "rgba(200,20,30)")
+    screen.drawText("Have fun",-0,-50,20, "rgba(200,200,30)") after 2 seconds do clear=true end end  
+
+  //start screen
+ //
+//mouse inputs
+//
+//mouse hold
+if 1==1 then
+if mouse.pressed and clock==1.25 then after 0.1 seconds do clicktimer=clicktimer+0.5 end end
+if mouse.pressed==false then clicktimer=0 end
+if clicktimer==1 and clock==1.25 then after 0.1 seconds do clicktimer=0 if mousetype==1 then mousetype=0 elsif mousetype==0 then mousetype=1 end end end 
+  end
+//mouse hold
+//
+//mouse sensing
+if work==5 then
+//copperclick
+ if -145 <=mouse.y and -145>=mouse.y-5 or -145>=mouse.y  and -145<=mouse.y+5 then 
+  if -10<=mouse.x and -10>=mouse.x-25 or -20>=mouse.x and -20<=mouse.x+25  then 
+ if mouse.press then  copperclick=true after 0.01 seconds do copperclick=false end end end end
+// -56,-120 waterclick
+if -120 <=mouse.y and -120>=mouse.y-5 or -120>=mouse.y  and -120<=mouse.y+5 then 
+  if -56<=mouse.x and -56>=mouse.x-25 or -56>=mouse.x and -56<=mouse.x+25  then 
+ if mouse.press then  waterclick=true after 0.01 seconds do waterclick=false end end end end
+//50,-125 solarclick
+if -125 <=mouse.y and -125>=mouse.y-5 or -125>=mouse.y  and -125<=mouse.y+5 then 
+  if 50<=mouse.x and 50>=mouse.x-22 or 50>=mouse.x and 50<=mouse.x+22  then 
+ if mouse.press then  solarclick=true after 0.01 seconds do solarclick=false end end end end
+//-60,-110 hydrogenclick
+if -110 <=mouse.y and -110>=mouse.y-5 or -110>=mouse.y  and -110<=mouse.y+5 then 
+  if -60<=mouse.x and -60>=mouse.x-27 or -60>=mouse.x and -60<=mouse.x+27  then 
+ if mouse.press then  hydrogenclick=true after 0.01 seconds do hydrogenclick=false end end end end
+//-20,-120 oxygenc
+if -120 <=mouse.y and -120>=mouse.y-5 or -120>=mouse.y  and -120<=mouse.y+5 then 
+  if -2<=mouse.x and -2>=mouse.x-27 or -2>=mouse.x and -2<=mouse.x+27  then 
+ if mouse.press then  oxygenc=true after 0.01 seconds do oxygenc=false end end end end
+ //carbonc -73,-148
+ if -148 <=mouse.y and -148>=mouse.y-5 or -148>=mouse.y  and -148<=mouse.y+5 then 
+  if -73<=mouse.x and -73>=mouse.x-25 or -73>=mouse.x and -73<=mouse.x+25  then 
+ if mouse.press then  carbonc=true after 0.01 seconds do carbonc=false end end end end
+ //-40,-135 wirec
+ if -135 <=mouse.y and -135>=mouse.y-5 or -135>=mouse.y  and -135<=mouse.y+5 then 
+  if -40<=mouse.x and -40>=mouse.x-10 or -40>=mouse.x and -40<=mouse.x+10  then 
+ if mouse.press then  wirec=true after 0.01 seconds do wirec=false end end end end
+ //-83,-125 co2c
+ if -125 <=mouse.y and -125>=mouse.y-5 or -125>=mouse.y  and -125<=mouse.y+5 then 
+  if -83<=mouse.x and -83>=mouse.x-15 or -83>=mouse.x and -83<=mouse.x+15  then 
+ if mouse.press then  co2c=true after 0.01 seconds do co2c=false end end end end
+ //-62 -130 oxygenpipec
+ if -130 <=mouse.y and -130>=mouse.y-5 or -130>=mouse.y  and -130<=mouse.y+5 then 
+  if -62<=mouse.x and -62>=mouse.x-10 or -62>=mouse.x and -62<=mouse.x+10  then 
+ if mouse.press then oxygenpipec=true after 0.01 seconds do oxygenpipec=false end end end end 
+ // 0 -131 sidelasers
+  if -131 <=mouse.y and -131>=mouse.y-5 or -131>=mouse.y  and -131<=mouse.y+5 then 
+  if 0<=mouse.x and 0>=mouse.x-20 or 0>=mouse.x and -0<=mouse.x+20  then 
+ if mouse.press then sidelasersc=true after 0.01 seconds do sidelasersc=false end end end end 
+ //-65 -115 sabiter reactor
+ if -115 <=mouse.y and -115>=mouse.y-5 or -115>=mouse.y  and -115<=mouse.y+5 then 
+  if -65<=mouse.x and -65>=mouse.x-14 or -65>=mouse.x and -65<=mouse.x+14  then 
+ if mouse.press then stabyc=true after 0.01 seconds do stabyc=false end end end end 
+ //-57 -118 hydrogenstaby pipe 
+ if -118 <=mouse.y and -118>=mouse.y-5 or -118>=mouse.y  and -118<=mouse.y+5 then 
+  if -57<=mouse.x and -57>=mouse.x-10 or -57>=mouse.x and -57<=mouse.x+10  then 
+ if mouse.press then hstabyc=true after 0.01 seconds do hstabyc=false end end end end 
+ //-73 -118 co2staby pipe 
+ if -118 <=mouse.y and -118>=mouse.y-5 or -118>=mouse.y  and -118<=mouse.y+5 then 
+  if -73<=mouse.x and -73>=mouse.x-10 or -73>=mouse.x and -73<=mouse.x+10  then 
+ if mouse.press then cstabyc=true after 0.01 seconds do cstabyc=false end end end end 
+ //-70 -183 methanetank 
+  if -183 <=mouse.y and -183>=mouse.y-5 or -183>=mouse.y  and -183<=mouse.y+5 then 
+  if -70<=mouse.x and -70>=mouse.x-10 or -70>=mouse.x and -70<=mouse.x+10  then 
+ if mouse.press then methc=true after 0.01 seconds do methc=false end end end end 
+ //-40 -173 methanetank 
+   if -173 <=mouse.y and -173>=mouse.y-5 or -173>=mouse.y  and -173<=mouse.y+5 then 
+  if -40<=mouse.x and -40>=mouse.x-10 or -40>=mouse.x and -40<=mouse.x+10  then 
+ if mouse.press then smethc=true after 0.01 seconds do smethc=false end end end end end
+//-0 -185 rocketbase 
+   if -185 <=mouse.y and -185>=mouse.y-5 or -185>=mouse.y  and -185<=mouse.y+5 then 
+  if -0<=mouse.x and -0>=mouse.x-10 or -0>=mouse.x and -0<=mouse.x+10  then 
+ if mouse.press then rocketc=true after 0.01 seconds do rocketc=false end end end end 
+ //-36 -180 methfeed
+   if -180 <=mouse.y and -180>=mouse.y-5 or -180>=mouse.y  and -180<=mouse.y+5 then 
+  if -36<=mouse.x and -36>=mouse.x-10 or -36>=mouse.x and -36<=mouse.x+10  then 
+ if mouse.press then methfc=true after 0.01 seconds do methfc=false end end end end 
+ //-16 -120 oxyfeed
+   if -120 <=mouse.y and -120>=mouse.y-5 or -120>=mouse.y  and -120<=mouse.y+5 then 
+  if -16<=mouse.x and -16>=mouse.x-10 or -16>=mouse.x and -16<=mouse.x+10  then 
+ if mouse.press then oxyfc=true after 0.01 seconds do oxyfc=false end end end end 
+  // 81 -146 oxyfeed
+   if -146 <=mouse.y and -146>=mouse.y-5 or -146>=mouse.y  and -146<=mouse.y+5 then 
+  if 81<=mouse.x and 81>=mouse.x-10 or 81>=mouse.x and 81<=mouse.x+10  then 
+ if mouse.press then after 0.01 seconds do launch=true end end end end 
+
+
+//mouse sensing
+//
+// repair sensing 
+if 1==1 then
+//
+//-40 -150
+if -150 <=mouse.y and -150>=mouse.y-20 or -150>=mouse.y  and -150<=mouse.y+20 then 
+  if -40<=mouse.x and -40>=mouse.x-20 or -40>=mouse.x and -40<=mouse.x+20  then 
+ if mouse.press then  waterclickfix=true after 0.01 seconds do waterclickfix=false end end end end
+// 50 -120 
+if -120 <=mouse.y and -120>=mouse.y-20 or -120>=mouse.y  and -120<=mouse.y+20 then 
+  if 50<=mouse.x and 50>=mouse.x-20 or 50>=mouse.x and 50<=mouse.x+20  then 
+ if mouse.press then  solarclickfix=true after 0.01 seconds do solarclickfix=false end end end end
+//-84 -150
+if -150 <=mouse.y and -150>=mouse.y-20 or -150>=mouse.y  and -150<=mouse.y+20 then 
+  if -84<=mouse.x and -84>=mouse.x-20 or -84>=mouse.x and -84<=mouse.x+20  then 
+ if mouse.press then  carboncfix=true after 0.01 seconds do carboncfix=false end end end end
+ //-11 -150
+if -150 <=mouse.y and -150>=mouse.y-20 or -150>=mouse.y  and -150<=mouse.y+20 then 
+  if -11<=mouse.x and -11>=mouse.x-20 or -11>=mouse.x and -11<=mouse.x+20  then 
+ if mouse.press then copperclickfix=true after 0.01 seconds do copperclickfix=false end end end end
+  //-62 -150
+if -150 <=mouse.y and -150>=mouse.y-10 or -150>=mouse.y  and -150<=mouse.y+10 then 
+  if -62<=mouse.x and -62>=mouse.x-10 or -62>=mouse.x and -62<=mouse.x+10  then 
+ if mouse.press then stabyclickfix=true after 0.01 seconds do stabyclickfix=false end end end end
+ 
+ end
+// repair sensing
+//
+//button press sensing
+//-84 -140
+if work==90 then
+if -140 <=mouse.y and -140>=mouse.y-3 or -140>=mouse.y  and -140<=mouse.y+3 then 
+  if -84<=mouse.x and -84>=mouse.x-3 or -84>=mouse.x and -84<=mouse.x+3  then 
+ if mouse.press and work==90 and laser==false then  laser=true 
+   elsif mouse.press and work==90 and laser==true then  laser=false  end end end
+// -62 -140 
+if -140 <=mouse.y and -140>=mouse.y-3 or -140>=mouse.y  and -140<=mouse.y+3 then 
+  if -62<=mouse.x and -62>=mouse.x-3 or -62>=mouse.x and -62<=mouse.x+3  then 
+ if mouse.press then if stabyon==false then  stabyon=true else stabyon=false end end end end
+//-39 -140
+if -140 <=mouse.y and -140>=mouse.y-3 or -140>=mouse.y  and -140<=mouse.y+3 then 
+  if -39<=mouse.x and -39>=mouse.x-3 or -39>=mouse.x and -39<=mouse.x+3  then 
+ if mouse.press then if electro==false then  electro=true else electro=false end end end end
+end
+//-37 -184
+if -184 <=mouse.y and -184>=mouse.y-3 or -184>=mouse.y  and -184<=mouse.y+3 then 
+  if -37<=mouse.x and -37>=mouse.x-3 or -37>=mouse.x and -37<=mouse.x+3  then 
+ if mouse.press then if sendmeth==false then  sendmeth=true else sendmeth=false end end end end
+//-16 -140
+if -140 <=mouse.y and -140>=mouse.y-3 or -140>=mouse.y  and -140<=mouse.y+3 then 
+  if -16<=mouse.x and -16>=mouse.x-3 or -16>=mouse.x and -16<=mouse.x+3  then 
+ if mouse.press then if sendoxy==false then  sendoxy=true else sendoxy=false end end end end
+print (mouse.x) print(mouse.y)
+
+
+//button press sensing
+//
+// repair sensing2
+if 1==1 then
+if work==5 and waterclickfix==true and waterstorage==true and mousetype==1 and iron>=1 then iron=iron-1 wsh=wsh+1 end
+if work==5 and solarclickfix==true and solar==true and mousetype==1 and copper>=1 and iron>=1 and silicon>=1 then copper=copper-1 iron=iron-1 silicon=silicon-1 sh=sh+1 end
+if work==5 and carboncfix==true and carbonlaser==true and mousetype==1 and iron>=1 and silicon>=1 then iron=iron-1 silicon=silicon-1 clh=clh+1 end
+if work==5 and copperclickfix==true and coppertube1==true and mousetype==1 and copper>=1 then copper=copper-1 cth=cth+1 end
+if work==5 and stabyclickfix==true and staby==true and mousetype==1 and copper>=1 and iron>=1 and nickel>=1 then copper=copper-1 iron=iron-1 nickel=nickel-1 sth=sth+1 end
+end
+// repair sensing2
+//
+//purchase of upgrades
+  if work==5 and mousetype==0 then
+   if work==5 and copper>=2 and copperclick==true and coppertube1==false then after 0.1 seconds do coppertube1=true end  copper=copper-2 cth=4  end 
+   if waterclick==true and waterstorage==false and work==5 and iron>=5 then after 0.1 seconds do waterstorage=true end iron=iron-5 wsh=6 end
+   if solarclick==true and solar==false and work==5 and copper>=4 and iron>=2 and silicon>=4 then solar=true copper=copper-4 iron=iron-2 silicon=silicon-4 sh=4 end
+   if oxygenc==true and oxygentank==false and copper>=2 and iron>=4 and waterstorage==true and solar==true then copper=copper-2 iron=iron-2  oth=2 oxygentank=true end
+   if hydrogenclick==true and hydrogentank==false and work==5 and copper>=2 and iron>=6 and waterstorage==true and solar==true then copper=copper-2 iron=iron-6 hydrogentank=true end 
+   if carbonc==true and carbonlaser==false and work==5 and silicon>=2 and iron>=5 and waterstorage==true and solar==true and coppertube1==true then silicon=silicon-2 iron=iron-5 carbonlaser=true clh=4 end 
+   if co2c==true and co2tank==false and work==5 and copper>=2 and iron>=4 and carbonlaser==true  then copper=copper-2 iron=iron-4 co2tank=true end 
+   if wirec==true and electrowire==false and work==5 and copper>=3 and waterstorage=true and solar=true  then copper=copper-3 electrowire=true end 
+   if oxygenpipec==true and oxygenlaser==false and work==5 and copper>=3 and oxygentank==true and co2tank==true and carbonlaser==true then copper=copper-3 oxygenlaser=true end 
+   if sidelasersc==true and sidelasers==false and work==5 and copper>=1 and silicon>=5 and iron>=6 and waterstorage==true and solar==true and oxygentank==true and hydrogentank==true and coppertube1==true then copper=copper-1 iron=iron-6 silicon=silicon-5 sidelasers=true end 
+   if stabyc==true and staby==false and stabytext==true and work==5 and copper>=3 and nickel>=4 and iron>=5 and carbonlaser==true and waterstorage==true and solar==true and oxygentank==true and hydrogentank==true and coppertube1==true and co2tank==true and electrowire==true and oxygenlaser==true  then copper=copper-3 iron=iron-5 nickel=nickel-4 staby=true sth=5 end 
+   if hstabyc==true and hydrogenstaby==false and hydrogenpipetext==true and work==5 and copper>=3 then copper=copper-3  hydrogenstaby=true end 
+   if cstabyc==true and co2staby==false and co2pipetext==true and work==5 and copper>=3 then copper=copper-3  co2staby=true end 
+   if methc==true and work==5 and staby==true and iron>=8 then methanetank=true iron=iron-8 end 
+   if smethc==true and work==5 and staby==true and copper>=3 then stabymethane=true copper=copper-3 end 
+   if rocketc==true and work==5 and stabymethane==true and copper>=5 and iron>=12 and silicon>=3 then copper=copper-5 iron=iron-12 silicon-3 rocketbody=true end
+   if methfc==true and work==5 and rocketbody==true and copper>=5 then methf=true copper=copper-5 end 
+   if oxyfc==true and work==5 and rocketbody==true and copper>=5 then oxyf=true copper=copper-5 end 
+  end 
+//purchase of upgrades
+//sidelaser
+if work==90 then 
+if active==1 and heat<2 and clock==1.5 then heat=heat+1 end
+if active==0 and heat>0 and clock==1.5 then heat=heat-1 end
+if beem_good==1==false then if heat>=2  then BEEM="bigbeem" elsif heat<=2 then BEEM="beem" end
+end
+if heat>=2 then after 0.1 seconds do beem_good=1 end end
+ if  clock==1.25 then active=0 end
+ if keyboard.DOWN and sidelasers==true then if beem_good==1==false then active=1 end end
+end
+//sidelaser
+//
+ mouse
+ if work==5 and mousetype==0 then screen.drawSprite("mouse",mouse.x,mouse.y,25)
+ elsif work==5 and mousetype==1 then screen.drawSprite("mousefix",mouse.x,mouse.y,25) end
+//
+// end screen
+if power<0.8 and solar==false then gameend=true 
+if gameend==true then screen.drawSprite("end",-0,-0,200) end 
+if gameend==true then screen.drawText("click screen to restart",-0,-20,20, "rgba(1000,140,10)") end 
+if mouse.press then init() end end 
+if launch==true then oxyf=false methf=false end
+if gameend==true then
+  carbon=0
+  water=0
+  silicon=0
+  nickel=0
+  iron=0
+  copper=0
+  //gases
+  hydrogen=0
+  oxygen=0
+  co2=0
+  methane=0
+  
+  waterstorage=false
+
+  coppertube1=false
+  solar=false
+
+  oxygentank=false
+
+  hydrogentank=false
+  electrowire=false
+  carbonlaser=false
+  sth=0
+  co2tank=false
+  sidelasers=false
+  staby=false
+
+  methanetank=false
+  //upgrades
+  //
+  //pipes
+  oxygenlaser=false
+  hydrogenstaby=false
+  co2staby=false
+  stabymethane=false
+  oxyf=false
+  methf=false
+  rocketbody=false
+  //
+  power=13
+  end
+
+// end screen
+//
+//player help
+if copperclick==true then after 0.1 seconds do helpup=true end end
+if waterstorage==true and coppertube1==true and helpup==true then 
+  screen.drawText("click UP arrow to speed up laser beems",-0,-20,11, "rgba(300,300,300)") after 5 seconds do helpup=false end end 
+//
+if sidelasersc==true then after 0.1 seconds do helpdown=true end end
+if sidelasers==true and helpdown==true then 
+  screen.drawText("hold DOWN arrow to use mega laser beems",-0,-20,11, "rgba(300,300,300)") after 5 seconds do helpdown=false end end 
+//player help
+//
+// power inout display
+if power<12.85 then
+if clock==1.5 then after 1 second do power1=power end end
+if clock==1.5 then powerdisplay= round((power-power1)*100)/100  end
+if powerdisplay<0 then  screen.drawText(powerdisplay,0,base-15,8, "rgba(300,30,30)")  end 
+if powerdisplay>0 then  screen.drawText(powerdisplay,0,base-15,8, "rgba(30,300,30)") end end
+if powerdisplay==0 or power>12.85 then  screen.drawText("0",0,base-15,8, "rgba(300,300,300)")  end 
+
+// power inout display
+//
+//asteriod hit
+if LASER_BEEM.BEEM_Y<=ASTERIOD.Y and LASER_BEEM.BEEM_Y>=ASTERIOD.Y-HB or LASER_BEEM.BEEM_Y>=ASTERIOD.Y  and LASER_BEEM.BEEM_Y<=ASTERIOD.Y+HB then if LASER_BEEM.BEEM_X<=ASTERIOD.X and LASER_BEEM.BEEM_X>=ASTERIOD.X-HB or LASER_BEEM.BEEM_X>=ASTERIOD.X  and LASER_BEEM.BEEM_X<=ASTERIOD.X+HB then after 0.05 seconds do
+
+
+if 1==1 then
+   if ASTERIOD.Type=="carbonaceous_asteriod" then IG=CIG  end
+  if ASTERIOD.Type=="stony_asteriod"  then IG=SIG end
+  if ASTERIOD.Type=="metalic_asteriod" then IG=MCIG   end
+  if ASTERIOD.Type=="metal_asteriod" then IG=MLIG  end
+end
+
+
+if shots>S/IG then after 0.1 seconds do
+ if ASTERIOD.Type=="carbonaceous_asteriod" then dmga=false audio.playSound("beeemhit",0.75)  asteriod="carbonaceous_break1" after 0.15 seconds do asteriod="carbonaceous_break2" after 0.15 seconds do asteriod="carbonaceous_break3" after 0.15 seconds do asteriod="carbonaceous_break4"after 0.15 seconds do y=-170 dmga=true end end end end end
+  if ASTERIOD.Type=="stony_asteriod"  then dmga=false audio.playSound("beeemhit",0.75)  asteriod="stony_asteriodbreak1" after 0.15 seconds do asteriod="stony_asteriodbreak2" after 0.15 seconds do asteriod="stony_asteriodbreak3" after 0.15 seconds do asteriod="stony_asteriodbreak4"after 0.15 seconds do y=-170 dmga=true end end end end end 
+  if ASTERIOD.Type=="metalic_asteriod" then dmga=false audio.playSound("beeemhit",0.75)  asteriod="metalic_asteriodbreak1" after 0.15 seconds do asteriod="metalic_asteriodbreak2" after 0.15 seconds do asteriod="metalic_asteriodbreak3" after 0.15 seconds do asteriod="metalic_asteriodbreak4"after 0.15 seconds do y=-170 dmga=true end end end end end 
+  if ASTERIOD.Type=="metal_asteriod" then  dmga=false audio.playSound("beeemhit",0.75)    asteriod="metalic_asteriod_rarebreak1" after 0.15 seconds do asteriod="metalic_asteriod_rarebreak2" after 0.15 seconds do asteriod="metalic_asteriod_rarebreak3" after 0.15 seconds do asteriod="metalic_asteriod_rarebreak4"after 0.15 seconds do y=-170 dmga=true end end end end end
+end end
+if shots>S/IG then
+   if ASTERIOD.Type=="carbonaceous_asteriod" then water=water+round(S/40) carbon=carbon+round(S/30) end
+  if ASTERIOD.Type=="stony_asteriod"  then silicon=silicon+round(S/40) iron=iron+round(S/80)  end
+  if ASTERIOD.Type=="metalic_asteriod" then  iron=iron+round(S/50) copper=copper+round(S/50)   end
+  if ASTERIOD.Type=="metal_asteriod" then   iron=iron+round(S/30) nickel=nickel+round(S/90) copper=copper+round(S/30) iron=iron+round(S/40) end
+end
+  
+  end end end
+//asteriod hit
+//
+//
+//sounds 
+if 1==2 then 
+if laser==true and work==90 and soundSTop==0 then audio.playSound("laser",0.5) soundSTop=1 after 1.9 seconds do soundSTop=0 end end
+if laserS==true then audio.playSound("laser",0.5) laserS=false end
+audio.playMusic("space",0.20)
+if keyboard.SPACE and power>1 and beem_good==0 and soundstop==0 then audio.playSound("beem",0.5) soundstop=1 end
+if clock==1.25 then soundstop=0 end
+if heat>=2 and power>1 and beem_good==0 and soundstop==0 then audio.playSound("bigbeem") soundstop=1 end
+if electro==true and water>=5 and work==90 and waterstorage==true and electrowire==true and oxygentank==true and hydrogentank==true then bubbles=true else bubbles=false  end
+if bubbles==true and clock==1.5 then audio.playSound("bubble1") end
+if bubbles==true and clock==1.5 then after 0.7 seconds do audio.playSound("bubble1")end end 
+if y==-160 and soundStop==0 then after 0.015 seconds do  audio.playSound("boom1",0.05) soundStop=1 after 3 seconds do soundStop=0 end end end
+if y==-160 and soundStop==0 then audio.playSound("beemhit",0.20) soundStop=1 after 3 seconds do soundStop=0 end end
+if LASER_BEEM.BEEM_Y<=ASTERIOD.Y and LASER_BEEM.BEEM_Y>=ASTERIOD.Y-HB or LASER_BEEM.BEEM_Y>=ASTERIOD.Y  and LASER_BEEM.BEEM_Y<=ASTERIOD.Y+HB then if LASER_BEEM.BEEM_X<=ASTERIOD.X and LASER_BEEM.BEEM_X>=ASTERIOD.X-HB or LASER_BEEM.BEEM_X>=ASTERIOD.X  and LASER_BEEM.BEEM_X<=ASTERIOD.X+HB then if BEEM=="beem"  and soundStop==0 then audio.playSound("beeemhit",0.25) soundStop=1 after 1 seconds do soundStop=0 end end end end
+if BEEM=="bigbeem" and shots>S/IG and soundStop==0 then audio.playSound("beeemhit",2) soundStop=1 after 3 seconds do soundStop=0 end end
+if active==true and play==true then after 0.48 seconds do audio.playSound("lasercharge",0.2) play=false end end
+if active==false then play=true end
+end
+
+    if sheat>=3 and work==90 and hydrogen>=4 and co2>=1 and co2staby==true and hydrogenstaby==true and work==90 and sotop==0 then audio.playSound("combust",0.5) sotop=1 after 2 seconds do sotop=0 end end
+// sounds
+//
+//mobile
+if mobile==true and start==true then
+if work==90 then
+  screen.drawSprite("shop",-70,183,150)
+   screen.drawText("shop",-70,184.5,19, "rgba(300,300,300)")
+end
+if work==5 then
+  screen.drawSprite("resume",70,183,160)
+   screen.drawText("resume",70,184.5,15.5, "rgba(300,300,300)")
+end
+//joystick
+if 1==1 then laseraimy= mouse.y+165 end
+if 1==1 then laseraimx= mouse.x+8 end
+
+if work==90 then screen.drawSprite("laseraim1",laseraimx,laseraimy,380) end
+
+ if laseraimy>y+160 and laseraimy<y+160+60 or  laseraimy>y+160 and laseraimy<y+160-60 and  laseraimx>x+160 and laseraimx<x+160+60 or  laseraimx>x+160 and laseraimx<x+160-60   then locked=true else locked=false print(1) end
+if locked== true  then print("locked") end 
+if locked == true then beem_good=1 end
+if 1==1 then aimx= 0-  mouse.x end
+if 1==1 then aimy= base+10 - mouse.y end
+if 1==1 then rad = atan2(aimy,aimx) end
+if 1==1 then angle= rad*(180/3.14) print(angle) end
+if 1==1 then pivot = angle+90  end
+if locked==false then screen.drawSprite("space",0,-183.5,50) end
+if locked==true then screen.drawSprite("spaceactive",0,-183.5,50) end
+
+if clock==1.25 then shop=false end
+if clock==1.25 then resume=false end
+
+if work==90 then if 180 <=mouse.y and 180>=mouse.y-20 or 180>=mouse.y  and 180<=mouse.y+20 then 
+  if -72<=mouse.x and -72>=mouse.x-20 or -72>=mouse.x and -72<=mouse.x+20  then 
+ if mouse.pressed or touch.pressed then shop=true end end end end
+ 
+ if work==5 then if 180 <=mouse.y and 180>=mouse.y-20 or 180>=mouse.y  and 180<=mouse.y+20 then 
+  if 72<=mouse.x and 72>=mouse.x-20 or 72>=mouse.x and 72<=mouse.x+20  then 
+ if mouse.pressed or touch.pressed then resume=true end end end end
+
+
+
+
+
+
+ if -182 <=mouse.y and -182>=mouse.y-20 or -182>=mouse.y  and -182<=mouse.y+20 then 
+  if 0<=mouse.x and 0>=mouse.x-20 or 0>=mouse.x and 0<=mouse.x+20  then 
+ if mouse.press or touch.press then SPACE=true end end end 
+if clock==1.25 then SPACE=false end
+//joystick
+end
+//mobile
+//
+//
+//gamewon
+if 1==1 then
+if base>220 and won==false then screen.drawText("goal reached",-0,-0,20, "rgba(300,300,300)") end
+if base>220 then after 5 seconds do won=true end end
+if won==true then
+  screen.drawSprite("won",-0,-0,200) end  end
+//gamewon
+//
+//asteriod dmg
+if 1==1 then 
+Ahealth=S/IG
+if shots>Ahealth/3 and shots<Ahealth/1.5 and dmga==true  then
+ Admg=true end
+ if clock==1.25 then Admg=false end
+ if clock==1.25 then Admg2=false end
+  if clock==1.25 then Admg3=false end
+if Admg==true then
+   if ASTERIOD.Type=="carbonaceous_asteriod"  then asteriod= "carbondmg1" end
+  if ASTERIOD.Type=="metalic_asteriod" then  asteriod= "metalicdmg1"   end
+    if ASTERIOD.Type=="metal_asteriod" then asteriod= "metaldmg1"  end
+  if ASTERIOD.Type=="stony_asteriod" then asteriod= "stonedmg1"  end
+end
+
+if shots>=Ahealth/1.5 and dmga==true  then
+  Admg2=true end
+ 
+ if Admg2==true then
+   if ASTERIOD.Type=="carbonaceous_asteriod" or ASTERIOD.Type=="carbondmg1"  then asteriod= "carbondmg2" end
+  if ASTERIOD.Type=="metalic_asteriod" or ASTERIOD.Type=="metalicdmg1" then  asteriod= "metalicdmg2"   end
+  if ASTERIOD.Type=="metal_asteriod" or ASTERIOD.Type=="metaldmg1" then asteriod= "metaldmg2"  end
+    if ASTERIOD.Type=="stony_asteriod" or ASTERIOD.Type=="stonedmg1" then asteriod= "stonedmg2"  end
+ end
+
+ if shots>Ahealth then Admg3=true end
+    if Admg3==true then
+  if  ASTERIOD.Type=="carbondmg1"  or asteriod== "carbondmg2" then  ASTERIOD.Type="carbonaceous_asteriod" end
+  if ASTERIOD.Type=="stonedmg1" then ASTERIOD.Type="stony_asteriod" end
+  if asteriod== "stonedmg2" then ASTERIOD.Type="stony_asteriod" end
+  if  ASTERIOD.Type=="metalicdmg1" or  asteriod== "metalicdmg2"  then ASTERIOD.Type="metalic_asteriod"end
+  if  ASTERIOD.Type=="metaldmg1" or asteriod== "metaldmg2" then ASTERIOD.Type="metal_asteriod" end
+    end
+end
+
+//asteriod dmg
+//perm storage
+//
+//materials
+storage.set("iron",iron)
+storage.set("copper",copper)
+storage.set("silicon",silicon)
+storage.set("water",water)
+storage.set("carbon",carbon)
+storage.set("nickel",nickel)
+storage.set("hydrogen",hydrogen)
+storage.set("oxygen",oxygen)
+storage.set("methane",methane)
+storage.set("co2",co2) 
+//materials
+//
+// upgrades
+ storage.set("waterstorage",waterstorage)
+  storage.set("coppertube1",coppertube1)
+  storage.set("solar",solar)
+  storage.set("oxygentank",oxygentank)
+  storage.set("hydrogentank",hydrogentank)
+  storage.set("electrowire",electrowire)
+  storage.set("carbonlaser",carbonlaser)
+  storage.set("co2tank",co2tank)
+  storage.set("sidelasers",sidelasers)
+  storage.set("staby",staby)
+  storage.set("methanetank",methanetank)
+  storage.set("oxygenlaser",oxygenlaser)
+  storage.set("hydrogenstaby",hydrogenstaby)
+  storage.set("co2staby",co2staby)
+  storage.set("stabymethane",stabymethane)
+   storage.set("rocketbody",rocketbody)
+  storage.set("methf",methf)
+  storage.set("oxyf",oxyf)
+  // upgrades
+  //
+  //upgrade health
+  storage.set("sh",sh)
+  storage.set("oth",oth)
+  storage.set("clh",clh)
+  storage.set("sth",sth)
+  storage.set("wsh",wsh)
+   //upgrade health
+   //
+   //ect
+   storage.set("power",power)
+   storage.set("notfirst",notfirst)
+   //ect
+  //
+  if time>20 then notfirst=true end
+  print(time)
+//perm storage
+//
+
+
+ 
+
+ 
+
+  
+ 
+  CIG=20//carbon internal gravity
+  SIG=18//stony internal gravity
+  MCIG=16//metalic internal gravity
+  MLIG=14//metal internal gravity
+ //msc
+// if ironmem>
+ //msc
+ end  
+
+
+ 
+
+   
